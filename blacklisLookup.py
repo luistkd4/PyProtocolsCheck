@@ -3,12 +3,12 @@ import threading
 import dns.resolver
 import queue
 
-sql = "SELECT blacklist FROM blacklists WHERE enabled = 1"
-dbConnection = pymysql.connect(host="HOST", port=0000, user="USER", passwd="PASSWORD", db="database")
-cursor = dbConnection.cursor()
-cursor.execute(sql)
-blacklists = cursor.fetchall()
-dbConnection.close()
+client = pymongo.MongoClient("mongodb://")
+db = client.sysMonitor
+col = db.blacklists
+blacklists = []
+for obj in col.find():
+ blacklists.append(obj['dns'])
 
 class blacklistLookup:
     __record = str()
