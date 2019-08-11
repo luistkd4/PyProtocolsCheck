@@ -1,4 +1,4 @@
-import pymysql
+import pymongo
 import threading
 import dns.resolver
 import queue
@@ -28,6 +28,8 @@ class blacklistLookup:
             result.append(myIP+":"+bl+":NOT LISTED")
         except dns.resolver.NoAnswer:
             result.append(myIP+":"+bl+":NO ANSWER")
+        except dns.resolver.NoNameservers:
+            result.append(myIP+":"+bl+":NO NSSERVER")
         return result
 
     def setAnswerJsonFormat(self, lookupresult):

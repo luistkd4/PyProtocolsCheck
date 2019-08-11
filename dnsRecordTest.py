@@ -1,5 +1,4 @@
 import dns.resolver
-import pymysql
 
 
 class dnsRecordTest:
